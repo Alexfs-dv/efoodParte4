@@ -10,10 +10,13 @@ type ShopProps = {
   tagInfo: string
   description: string
   rate: number
+  id: number
 };
 
-const Shop = ({ isFeatured, title, img, tagInfo, description, rate }: ShopProps) => (
-  <Card>
+const Shop = ({ isFeatured, title, img, tagInfo, description, rate, id }: ShopProps) => {
+
+  return (
+    <Card>
     <CardImage>
       <img src={img} alt={title} />
     </CardImage>
@@ -32,9 +35,10 @@ const Shop = ({ isFeatured, title, img, tagInfo, description, rate }: ShopProps)
       <Description>
         {description}
       </Description>
-      <Button type="link" to="/perfil" title="Saiba mais">Saiba mais</Button>
+      <Button type="link" to={`/shop/${id}`} title="Saiba mais">Saiba mais</Button>
     </CardBody>
   </Card>
-)
+  )
+}
 
 export default Shop;

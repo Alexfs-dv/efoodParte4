@@ -37,10 +37,12 @@ export const Info = styled.div`
 `
 
 export const CardImage = styled.div`
-  display: inline-block;
+  display: flex;
 
   img {
     width: 100%;
+    height: 217px;
+    object-fit: cover;
   }
 `
 
@@ -61,4 +63,8 @@ export const Description = styled.p`
 `
 export const CardBody = styled.div`
   padding: 8px;
+  border-width: 0px 1px 1px 1px;
+  border-style: solid;
+  border-color: #E66767;
+  margin-top: -4px;
 `

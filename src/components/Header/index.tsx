@@ -1,5 +1,6 @@
 import { HeaderBar, HeaderContent, Logo, Text } from './styles'
 import logo from '../../assets/images/logo.svg'
+import vectorBackground from '../../assets/images/Vector.png';
 import { Container } from '../../styles';
 
 export type Props = {
@@ -10,7 +11,7 @@ export type Props = {
 }
 
 const Header = ({ showText, cartItem, restaurantLabel, isProfilePage }: Props) => (
-  <HeaderBar showText={showText} cartItem={cartItem} restaurantLabel={restaurantLabel}>
+  <HeaderBar style={{ backgroundImage: `url(${vectorBackground})` }} showText={showText} cartItem={cartItem} restaurantLabel={restaurantLabel}>
     {isProfilePage ? (
       <Container>
         <HeaderContent>
@@ -18,11 +19,6 @@ const Header = ({ showText, cartItem, restaurantLabel, isProfilePage }: Props) =
           <Logo src={logo} alt='eFood'/>
           <p>{cartItem} Produto(s) no carrinho</p>
         </HeaderContent>
-        {showText && (
-          <Text showText={showText}>
-            Viva experiências gastronômicas no conforto da sua casa
-          </Text>
-        )}
       </Container>
     ) : (
       <>

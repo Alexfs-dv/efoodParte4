@@ -1,30 +1,40 @@
+import { ApiRestaurants } from "../../pages/Home";
 import { Container } from "../../styles";
 import Shop from "../Shop";
 import { List } from "./styles";
-import ShopClass from "../../models/ShopClass";
 
 type Props = {
-  shop: ShopClass[]
+  shop: ApiRestaurants[]
 }
 
-const ShopList = ({ shop }: Props) => (
-  <Container>
+export const getDescricao = (descricao: string) => {
+    if(descricao.length > 0) {
+      return descricao.slice(0, 192) + '...'
+    }
+    return descricao;
+  }
+const ShopList = ({ shop }: Props) => {
+
+  return (
+    <Container>
     <div className="Container">
       <List>
         {shop.map((shop) => (
           <Shop
             key={shop.id}
-            isFeatured= {shop.isFeatured}
-            title={shop.title}
-            img={shop.img}
-            tagInfo={shop.tagInfo}
-            description={shop.description}
-            rate={shop.rate}
+            title={shop.titulo}
+            isFeatured= {shop.destacado}
+            tagInfo={shop.tipo}
+            rate={shop.avaliacao}
+            description={getDescricao(shop.descricao)}
+            img={shop.capa}
+            id={shop.id}
             />
         ))}
       </List>
     </div>
   </Container>
-);
+  )
+}
 
 export default ShopList;

@@ -2,26 +2,46 @@ import styled from 'styled-components';
 import { cores } from '../../styles';
 
 export const ContentHero = styled.div`
-  display: flex;
-  color: ${cores.branco}
-  `
-
-  export const ImgHero = styled.img`
   position: absolute;
-  top: 185px;
+  display: block;
   height: 280px;
-  max-width: 100%;
-  `
-  export const TextHero = styled.div`
-    position: absolute;
-    top: 200px;
-    height: 240px;
-    z-index: 1;
+  width: 100%;
+  top: 185px;
+
+  div {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    color: #fff;
-    font-weight: 100;
-    font-size: 32px;
-  `
+    height: 100%;
+    padding-top: 25px;
+    padding-bottom: 32px;
+    z-index: 1;
+
+
+    p, h4 {
+      font-size: 32px;
+      font-weight: 100;
+      color: ${cores.branco}
+      }
+
+    h4 {
+      font-weight: 900;
+    }
+  }
+
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+
+  &::after {
+    position: absolute;
+    background-color: #000;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    content: '';
+    opacity: 0.5;
+  }
+`
 
