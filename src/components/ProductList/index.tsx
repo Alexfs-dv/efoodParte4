@@ -4,7 +4,7 @@ import { ListProduct } from "./styles";
 
 export type Product = {
   foto: string;
-  preco: string;
+  preco: number;
   id: number;
   nome: string;
   descricao: string;

@@ -8,7 +8,7 @@ type Props = {
   foto: string
   descricao: string
   porcao: string
-  preco: string
+  preco: number
 }
 
 export const formatPrice = (price = 0) => {
