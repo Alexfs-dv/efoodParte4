@@ -2,13 +2,18 @@ import { CardProduct, CardProductBody, Description, Modal, ModalBody, ModalConte
 import fechar from '../../assets/images/close.svg'
 import { getDescricao } from '../../components/ShopList'
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
-type Props = {
-  nome: string
-  foto: string
-  descricao: string
-  porcao: string
-  preco: number
+import { add, open } from '../../store/reducers/cart';
+import { ApiRestaurants } from "../../pages/Home";
+
+export type ProductProps = {
+  foto: string;
+  preco: number;
+  id: number;
+  nome: string;
+  descricao: string;
+  porcao: string;
 }
 
 export const formatPrice = (price = 0) => {
@@ -18,8 +23,30 @@ export const formatPrice = (price = 0) => {
   }).format(price)
 }
 
-const Product = ({ nome, foto, descricao, porcao, preco }: Props) => {
+const Product = ({ foto, preco, id, nome, descricao, porcao }: ProductProps) => {
   const [modalIsVisible, setModalIsVisible] = useState(false)
+
+  const dispatch = useDispatch()
+
+  const addToCart = () => {
+    try {
+      const product: ApiRestaurants = {
+      id,
+      titulo: nome,
+      capa: foto,
+      cardapio: { foto, preco, id, nome, descricao, porcao },
+      destacado: false,
+      tipo: '',
+      avaliacao: 0,
+      descricao: ''
+    }
+      dispatch(add(product))
+      setModalIsVisible(false)
+      dispatch(open())
+    } catch (error) {
+      console.error("Erro ao adicionar ao carrinho:", error)
+    }
+  }
 
   return (
     <>
@@ -42,7 +69,7 @@ const Product = ({ nome, foto, descricao, porcao, preco }: Props) => {
                 {descricao}
               </p>
               <p>Serve: {porcao}</p>
-            <ProductButton type="button" title="Adicionar ao carrinho">Adicionar ao carrinho - R$ {formatPrice(Number(preco))}</ProductButton>
+            <ProductButton type="button" title="Adicionar ao carrinho" onClick={addToCart} >Adicionar ao carrinho - R$ {formatPrice(Number(preco))}</ProductButton>
             </ModalDescription>
           </ModalBody>
         </ModalContent>

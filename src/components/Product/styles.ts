@@ -8,6 +8,11 @@ export const CardProduct = styled.div`
   padding: 8px;
   display: block;
 
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
+
   @media (max-width: 768px){
     margin-bottom: 32px;
   }
@@ -46,6 +51,10 @@ export const Modal = styled.div`
   left: 0;
   z-index: 1;
 
+  @media (max-width: 768px){
+    margin-bottom: 32px;
+  }
+
   &.visible {
     display: flex;
   }
@@ -71,6 +80,11 @@ export const ModalContent = styled.div`
   transform: translate(-50%, -50%);
   z-index: 1;
 
+  @media (max-width: 768px){
+    height: 600px;
+    width: 90%;
+  }
+
   .modalClose {
      width: 16px;
      height: 16px;
@@ -90,6 +104,16 @@ export const ModalBody = styled.div`
     width: 280px;
     height: 280px;
     margin-right: 24px;
+    object-fit: cover;
+
+    @media (max-width: 768px){
+      width: 100%;
+    }
+
+  }
+
+  @media (max-width: 768px){
+    display: block;
   }
 
 

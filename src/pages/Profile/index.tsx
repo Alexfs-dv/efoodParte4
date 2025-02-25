@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { Hero } from "../../components/Hero";
 import ProductList from "../../components/ProductList";
+import { useGetApiRestaurantsQuery } from '../../services/api';
 
 interface Product {
   foto: string;
@@ -24,19 +23,13 @@ export interface Restaurant {
 
 const Profile = () => {
   const { id } = useParams();
-  const [restaurant, setRestaurant] = useState<Restaurant | null>(null);
+  const { data, isLoading } = useGetApiRestaurantsQuery();
 
-  useEffect(() => {
-    const fetchRestaurants = async () => {
-      const response = await fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes');
-      const data = await response.json();
-      const selectedRestaurant = data.find((rest: Restaurant) => rest.id === Number(id));
-      setRestaurant(selectedRestaurant);
-    };
-    fetchRestaurants();
-  }, [id]);
+  if (isLoading) return <div>Carregando...</div>;
 
-  if (!restaurant) return <div>Carregando...</div>;
+  const restaurant = Array.isArray(data) ? data.find((rest: Restaurant) => rest.id === Number(id)) : undefined;
+
+  if (!restaurant) return <div>Restaurante não encontrado.</div>;
 
   return (
     <>
@@ -54,7 +47,6 @@ const Profile = () => {
       <div>
         <ProductList products={restaurant.cardapio} />
       </div>
-      <Footer />
     </>
   );
 };

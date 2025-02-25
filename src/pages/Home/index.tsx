@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
-
 import Header from "../../components/Header";
 import ShopList from "../../components/ShopList";
-import Footer from "../../components/Footer"
+import { useGetApiRestaurantsQuery } from '../../services/api'
 
 export type ApiRestaurants = {
   id: number
@@ -23,19 +21,14 @@ export type ApiRestaurants = {
 }
 
 const Home = () => {
-  const [restaurants, setRestaurants] = useState<ApiRestaurants[]>([])
+  const { data: restaurants, isLoading } = useGetApiRestaurantsQuery()
 
-  useEffect(() => {
-    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
-    .then((response) => response.json())
-    .then((response) => setRestaurants(response))
-  }, [])
+  if (isLoading) return <div>Carregando...</div>;
 
   return (
     <>
     <Header showText={true} />
-    <ShopList shop={restaurants} />
-    <Footer />
+    <ShopList shop={Array.isArray(restaurants) ? restaurants : []} />
   </>
   )
 }
