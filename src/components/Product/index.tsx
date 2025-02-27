@@ -38,6 +38,7 @@ const Product = ({ foto, preco, id, nome, descricao, porcao }: ProductProps) => 
       destacado: false,
       tipo: '',
       avaliacao: 0,
+      uniqueId: '',
       descricao: ''
     }
       dispatch(add(product))
@@ -56,7 +57,7 @@ const Product = ({ foto, preco, id, nome, descricao, porcao }: ProductProps) => 
           <Title>{nome}</Title>
           <Description>{getDescricao(descricao)}</Description>
         </CardProductBody>
-        <ProductButton onClick={() => setModalIsVisible(true)} type="button" title="Adicionar ao carrinho">Adicionar ao carrinho</ProductButton>
+        <ProductButton onClick={() => setModalIsVisible(true)} type="button" title="Adicionar ao carrinho">Mais detalhes</ProductButton>
       </CardProduct>
       <Modal className={modalIsVisible ? 'visible' : ''}>
         <ModalContent>

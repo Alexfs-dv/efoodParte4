@@ -22,8 +22,8 @@ const Cart = () => {
     }, 0)
   }
 
-  const removeItem = (id: number) => {
-    dispatch(remove(id))
+  const removeItem = (uniqueId: string) => {
+    dispatch(remove(uniqueId))
   }
 
   return (
@@ -32,13 +32,13 @@ const Cart = () => {
     <Sidebar>
       <ul>
         {items.map((item) => (
-          <CartItem key={item.id}>
+          <CartItem key={item.uniqueId}>
             <img src={item.cardapio.foto} alt={item.cardapio.nome} />
             <div>
               <h3>{item.cardapio.nome}</h3>
               <span>{formatPrice(item.cardapio.preco)}</span>
             </div>
-            <button onClick={() => removeItem(item.id)} type="button"></button>
+            <button onClick={() => removeItem((item.uniqueId))} type="button"></button>
           </CartItem>
         ))}
       </ul>
@@ -52,3 +52,4 @@ const Cart = () => {
 }
 
 export default Cart
+

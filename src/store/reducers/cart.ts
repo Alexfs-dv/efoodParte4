@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction} from '@reduxjs/toolkit';
 import { ApiRestaurants } from '../../pages/Home';
+import { v4 as uuidv4 } from 'uuid';
 
 type cartState = {
   items: ApiRestaurants[];
@@ -16,16 +17,11 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     add: (state, action: PayloadAction<ApiRestaurants>) => {
-      const item = state.items.find(item => item.id === action.payload.id);
-
-      if(!item) {
-        state.items.push(action.payload)
-      } else {
-        alert('O item já está no carrinho')
-      }
+      const itemWithuniqueId = { ...action.payload, uniqueId: uuidv4()}
+      state.items.push(itemWithuniqueId)
     },
-    remove: (state, action: PayloadAction<Number>) => {
-      state.items = state.items.filter((item) => item.id !== action.payload)
+    remove: (state, action: PayloadAction<String>) => {
+      state.items = state.items.filter((item) => item.uniqueId !== action.payload.toString())
     },
     open: (state) => {
       state.isOpen = true

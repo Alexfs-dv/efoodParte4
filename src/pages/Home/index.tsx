@@ -18,6 +18,7 @@ export type ApiRestaurants = {
     descricao: string
     porcao: string
   }
+  uniqueId: string
 }
 
 const Home = () => {
