@@ -1,29 +1,31 @@
-import { CardProduct, CardProductBody, Description, Modal, ModalBody, ModalContent, ModalDescription, ProductButton, Title } from "./styles";
-import fechar from '../../assets/images/close.svg'
-import { getDescricao } from '../../components/ShopList'
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 
-import { add, open } from '../../store/reducers/cart';
-import { ApiRestaurants } from "../../pages/Home";
+import { add, open } from '../../store/reducers/cart'
+import { getDescricao } from '../../components/ShopList'
+import { parseToBrl } from '../../utils'
+
+import fechar from '../../assets/images/close.svg'
+
+import * as S from './styles'
 
 export type ProductProps = {
-  foto: string;
-  preco: number;
-  id: number;
-  nome: string;
-  descricao: string;
-  porcao: string;
+  foto: string
+  preco: number
+  id: number
+  nome: string
+  descricao: string
+  porcao: string
 }
 
-export const formatPrice = (price = 0) => {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  }).format(price)
-}
-
-const Product = ({ foto, preco, id, nome, descricao, porcao }: ProductProps) => {
+const Product = ({
+  foto,
+  preco,
+  id,
+  nome,
+  descricao,
+  porcao
+}: ProductProps) => {
   const [modalIsVisible, setModalIsVisible] = useState(false)
 
   const dispatch = useDispatch()
@@ -31,53 +33,68 @@ const Product = ({ foto, preco, id, nome, descricao, porcao }: ProductProps) => 
   const addToCart = () => {
     try {
       const product: ApiRestaurants = {
-      id,
-      titulo: nome,
-      capa: foto,
-      cardapio: { foto, preco, id, nome, descricao, porcao },
-      destacado: false,
-      tipo: '',
-      avaliacao: 0,
-      uniqueId: '',
-      descricao: ''
-    }
+        id,
+        titulo: nome,
+        capa: foto,
+        cardapio: { foto, preco, id, nome, descricao, porcao },
+        destacado: false,
+        tipo: '',
+        avaliacao: 0,
+        uniqueId: '',
+        descricao: ''
+      }
       dispatch(add(product))
       setModalIsVisible(false)
       dispatch(open())
     } catch (error) {
-      console.error("Erro ao adicionar ao carrinho:", error)
+      console.error('Erro ao adicionar ao carrinho:', error)
     }
   }
 
   return (
     <>
-      <CardProduct>
+      <S.CardProduct>
         <img src={foto} alt={nome} />
-        <CardProductBody>
-          <Title>{nome}</Title>
-          <Description>{getDescricao(descricao)}</Description>
-        </CardProductBody>
-        <ProductButton onClick={() => setModalIsVisible(true)} type="button" title="Adicionar ao carrinho">Mais detalhes</ProductButton>
-      </CardProduct>
-      <Modal className={modalIsVisible ? 'visible' : ''}>
-        <ModalContent>
-          <img onClick={() => setModalIsVisible(false)} className="modalClose" src={fechar} alt="Ícone fechar" />
-          <ModalBody>
-              <img className="modalImage" src={foto} alt="Foto do produto" />
-            <ModalDescription>
+        <S.CardProductBody>
+          <S.Title>{nome}</S.Title>
+          <S.Description>{getDescricao(descricao)}</S.Description>
+        </S.CardProductBody>
+        <S.ProductButton
+          onClick={() => setModalIsVisible(true)}
+          type="button"
+          title="Adicionar ao carrinho"
+        >
+          Mais detalhes
+        </S.ProductButton>
+      </S.CardProduct>
+      <S.Modal className={modalIsVisible ? 'visible' : ''}>
+        <S.ModalContent>
+          <img
+            onClick={() => setModalIsVisible(false)}
+            className="modalClose"
+            src={fechar}
+            alt="Ícone fechar"
+          />
+          <S.ModalBody>
+            <img className="modalImage" src={foto} alt="Foto do produto" />
+            <S.ModalDescription>
               <h4>{nome}</h4>
-              <p>
-                {descricao}
-              </p>
+              <p>{descricao}</p>
               <p>Serve: {porcao}</p>
-            <ProductButton type="button" title="Adicionar ao carrinho" onClick={addToCart} >Adicionar ao carrinho - R$ {formatPrice(Number(preco))}</ProductButton>
-            </ModalDescription>
-          </ModalBody>
-        </ModalContent>
+              <S.ProductButton
+                type="button"
+                title="Adicionar ao carrinho"
+                onClick={addToCart}
+              >
+                Adicionar ao carrinho - R$ {parseToBrl(Number(preco))}
+              </S.ProductButton>
+            </S.ModalDescription>
+          </S.ModalBody>
+        </S.ModalContent>
         <div onClick={() => setModalIsVisible(false)} className="overlay"></div>
-      </Modal>
+      </S.Modal>
     </>
   )
 }
 
-export default Product;
+export default Product

@@ -1,20 +1,35 @@
-import { HeaderBar, HeaderContent, Logo, Text, LinkCart, StyledLink } from './styles'
-import logo from '../../assets/images/logo.svg'
-import vectorBackground from '../../assets/images/Vector.png';
-import { Container } from '../../styles';
+import { useDispatch, useSelector } from 'react-redux'
+import { RootReducer } from '../../store'
 
 import { open } from '../../store/reducers/cart'
-import { useDispatch, useSelector } from 'react-redux';
-import { RootReducer } from '../../store';
+
+import logo from '../../assets/images/logo.svg'
+import vectorBackground from '../../assets/images/Vector.png'
+import { HashLink } from 'react-router-hash-link'
+
+import { Container } from '../../styles'
+import {
+  HeaderBar,
+  HeaderContent,
+  Logo,
+  Text,
+  LinkCart,
+  StyledLink
+} from './styles'
 
 export type Props = {
-  showText: boolean;
-  cartItem?: number;
-  restaurantLabel?: string;
-  isProfilePage?: boolean;
+  $showtext: boolean
+  $cartitem?: number
+  $restaurantlabel?: string
+  isProfilePage?: boolean
 }
 
-const Header = ({ showText, cartItem, restaurantLabel, isProfilePage }: Props) => {
+const Header = ({
+  $showtext,
+  $cartitem,
+  $restaurantlabel,
+  isProfilePage
+}: Props) => {
   const dispatch = useDispatch()
   const { items } = useSelector((state: RootReducer) => state.cart)
 
@@ -23,34 +38,42 @@ const Header = ({ showText, cartItem, restaurantLabel, isProfilePage }: Props) =
   }
 
   return (
-    <HeaderBar style={{ backgroundImage: `url(${vectorBackground})` }} showText={showText} cartItem={cartItem} restaurantLabel={restaurantLabel}>
-    {isProfilePage ? (
-      <Container>
-        <HeaderContent>
-          <StyledLink to='/' >
-            <p>{restaurantLabel}</p>
-          </StyledLink>
-          <Logo src={logo} alt='eFood'/>
-          <LinkCart onClick={openCart}> {items.length} Produto(s) no carrinho</LinkCart>
-        </HeaderContent>
-      </Container>
-    ) : (
-      <>
-        <HeaderContent>
-        <StyledLink to='/' >
-            <p>{restaurantLabel}</p>
-          </StyledLink>
-          <Logo src={logo} alt='eFood'/>
-          <p>{cartItem}</p>
-        </HeaderContent>
-        {showText && (
-          <Text showText={showText}>
-            Viva experiências gastronômicas no conforto da sua casa
-          </Text>
-        )}
-      </>
-    )}
-  </HeaderBar>
+    <HeaderBar
+      style={{ backgroundImage: `url(${vectorBackground})` }}
+      $showtext={$showtext}
+      $cartitem={$cartitem}
+      $restaurantlabel={$restaurantlabel}
+    >
+      {isProfilePage ? (
+        <Container>
+          <HeaderContent>
+            <StyledLink to="/">
+              <p>{$restaurantlabel}</p>
+            </StyledLink>
+            <Logo src={logo} alt="eFood" />
+            <LinkCart onClick={openCart}>
+              {' '}
+              {items.length} Produto(s) no carrinho
+            </LinkCart>
+          </HeaderContent>
+        </Container>
+      ) : (
+        <>
+          <HeaderContent>
+            <HashLink to="/">
+              <p>{$restaurantlabel}</p>
+            </HashLink>
+            <Logo src={logo} alt="eFood" />
+            <p>{$cartitem}</p>
+          </HeaderContent>
+          {$showtext && (
+            <Text $showtext={$showtext}>
+              Viva experiências gastronômicas no conforto da sua casa
+            </Text>
+          )}
+        </>
+      )}
+    </HeaderBar>
   )
 }
 

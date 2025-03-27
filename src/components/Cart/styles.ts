@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { cores } from '../../styles';
-import remove from '../../assets/images/lixeira_icon.svg';
+import styled from 'styled-components'
+import { colors } from '../../styles'
+import remove from '../../assets/images/lixeira_icon.svg'
 
 export const Overlay = styled.div`
   position: absolute;
@@ -9,7 +9,7 @@ export const Overlay = styled.div`
   width: 100%;
   height: 100%;
   background-color: #000;
-  opacity: 0.8;
+  opacity: 0.7;
 `
 
 export const CartContainer = styled.div`
@@ -28,12 +28,19 @@ export const CartContainer = styled.div`
 `
 
 export const Sidebar = styled.aside`
-  background-color: ${cores.terciaria};
-  color: ${cores.secundaria};
+  background-color: ${colors.tertiary};
+  color: ${colors.secondary};
   z-index: 1;
   padding: 32px 8px 0 8px;
   max-width: 360px;
   width: 100%;
+
+  .empty-text {
+    font-size: 14px;
+    line-height: 22px;
+    color: ${colors.primary};
+    text-alogn: center;
+  }
 `
 
 export const PriceTotal = styled.p`
@@ -44,12 +51,12 @@ export const PriceTotal = styled.p`
   margin: 40px 0 16px 0;
 `
 
-export const CartItem = styled.li`
+export const $Cartitem = styled.li`
   position: relative;
   display: flex;
-  background-color: ${cores.secundaria};
+  background-color: ${colors.secondary};
   padding: 8px 8px 12px 8px;
-  color: ${cores.terciaria};
+  color: ${colors.tertiary};
   margin-bottom: 16px;
 
   img {

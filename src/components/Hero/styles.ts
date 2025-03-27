@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { cores } from '../../styles';
+import styled from 'styled-components'
+import { colors } from '../../styles'
 
 export const ContentHero = styled.div`
   position: absolute;
@@ -17,12 +17,12 @@ export const ContentHero = styled.div`
     padding-bottom: 32px;
     z-index: 1;
 
-
-    p, h4 {
+    p,
+    h4 {
       font-size: 32px;
       font-weight: 100;
-      color: ${cores.branco}
-      }
+      color: ${colors.white};
+    }
 
     h4 {
       font-weight: 900;
@@ -44,4 +44,3 @@ export const ContentHero = styled.div`
     opacity: 0.5;
   }
 `
-

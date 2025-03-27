@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 import { Props } from '.'
-import { breakpoints, cores } from '../../styles';
-import { Link } from 'react-router-dom';
+import { breakpoints, colors } from '../../styles'
+import { Link } from 'react-router-dom'
 
 export const HeaderBar = styled.header<Props>`
   position: relative;
@@ -16,15 +16,15 @@ export const HeaderBar = styled.header<Props>`
   justify-content: space-between;
   align-items: center;
   padding-top: 64px;
-  color: ${cores.terciaria};
+  color: ${colors.tertiary};
 
   @media (max-width: ${breakpoints.tablet}) {
     padding-top: 10%;
     padding-bottom: 10%;
-    }
-  `;
+  }
+`
 
-  export const HeaderContent = styled.div`
+export const HeaderContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -47,7 +47,7 @@ export const Logo = styled.img`
     margin-top: 24px;
     margin-bottom: 24px;
   }
-`;
+`
 
 export const Text = styled.p<Props>`
   position: absolute;
@@ -72,6 +72,6 @@ export const LinkCart = styled.p`
 
 export const StyledLink = styled(Link)`
   text-decoration: none;
-  color: ${cores.terciaria};
+  color: ${colors.tertiary};
   font-weight: bold;
 `

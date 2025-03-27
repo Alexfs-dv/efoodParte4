@@ -1,15 +1,15 @@
 import styled, { createGlobalStyle } from 'styled-components'
 
-export const cores = {
-  primaria: '#FFF8F2',
-  secundaria: '#FFEBD9',
-  terciaria: '#E66767',
-  branco: '#FFFFFF'
+export const colors = {
+  primary: '#FFF8F2',
+  secondary: '#FFEBD9',
+  tertiary: '#E66767',
+  white: '#FFFFFF'
 }
 
 export const breakpoints = {
   desktop: '1024px',
-  tablet: '768px',
+  tablet: '768px'
 }
 
 export const GlobalStyle = createGlobalStyle`
@@ -22,7 +22,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body {
-      background-color: ${cores.primaria}
+      background-color: ${colors.primary}
   }
 `
 export const Container = styled.div`
@@ -30,11 +30,11 @@ export const Container = styled.div`
   width: 100%;
   margin: 0 auto;
 
-  @media (max-width: ${breakpoints.desktop}){
+  @media (max-width: ${breakpoints.desktop}) {
     max-width: 80%;
   }
 
-  @media (max-width: ${breakpoints.tablet}){
+  @media (max-width: ${breakpoints.tablet}) {
     max-width: 90%;
   }
 `

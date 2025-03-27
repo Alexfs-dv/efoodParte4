@@ -6,9 +6,7 @@ export type Props = {
 }
 
 const Tag = ({ children, size = 'small' }: Props) => (
-  <TagContainer size={size}>
-    {children}
-  </TagContainer>
+  <TagContainer size={size}>{children}</TagContainer>
 )
 
 export default Tag

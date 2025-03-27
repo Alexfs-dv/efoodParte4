@@ -1,37 +1,23 @@
-import Header from "../../components/Header";
-import ShopList from "../../components/ShopList";
 import { useGetApiRestaurantsQuery } from '../../services/api'
 
-export type ApiRestaurants = {
-  id: number
-  titulo: string
-  destacado: boolean
-  tipo: string
-  avaliacao: number
-  descricao: string
-  capa: string
-  cardapio: {
-    foto: string
-    preco: number
-    id: number
-    nome: string
-    descricao: string
-    porcao: string
-  }
-  uniqueId: string
-}
+import Header from '../../components/Header'
+import ShopList from '../../components/ShopList'
+import Loader from '../../components/Loader'
 
 const Home = () => {
   const { data: restaurants, isLoading } = useGetApiRestaurantsQuery()
 
-  if (isLoading) return <div>Carregando...</div>;
+  if (isLoading) return <Loader />
 
   return (
     <>
-    <Header showText={true} />
-    <ShopList shop={Array.isArray(restaurants) ? restaurants : []} />
-  </>
+      <Header $showtext={true} />
+      <ShopList
+        isLoading={isLoading}
+        shop={Array.isArray(restaurants) ? restaurants : []}
+      />
+    </>
   )
 }
 
-export default Home;
+export default Home

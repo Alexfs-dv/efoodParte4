@@ -1,42 +1,47 @@
-import { useParams } from "react-router-dom";
-import Header from "../../components/Header";
-import { Hero } from "../../components/Hero";
-import ProductList from "../../components/ProductList";
-import { useGetApiRestaurantsQuery } from '../../services/api';
+import { useParams } from 'react-router-dom'
+
+import { useGetApiRestaurantsQuery } from '../../services/api'
+
+import Header from '../../components/Header'
+import { Hero } from '../../components/Hero'
+import ProductList from '../../components/ProductList'
+import Loader from '../../components/Loader'
 
 interface Product {
-  foto: string;
-  preco: number;
-  id: number;
-  nome: string;
-  descricao: string;
-  porcao: string;
+  foto: string
+  preco: number
+  id: number
+  nome: string
+  descricao: string
+  porcao: string
 }
 
 export interface Restaurant {
-  id: number;
-  titulo: string;
-  tipo: string;
-  capa: string;
-  cardapio: Product[];
+  id: number
+  titulo: string
+  tipo: string
+  capa: string
+  cardapio: Product[]
 }
 
 const Profile = () => {
-  const { id } = useParams();
-  const { data, isLoading } = useGetApiRestaurantsQuery();
+  const { id } = useParams()
+  const { data, isLoading } = useGetApiRestaurantsQuery()
 
-  if (isLoading) return <div>Carregando...</div>;
+  if (isLoading) return <Loader />
 
-  const restaurant = Array.isArray(data) ? data.find((rest: Restaurant) => rest.id === Number(id)) : undefined;
+  const restaurant = Array.isArray(data)
+    ? data.find((rest: Restaurant) => rest.id === Number(id))
+    : undefined
 
-  if (!restaurant) return <div>Restaurante não encontrado.</div>;
+  if (!restaurant) return <div>Restaurante não encontrado.</div>
 
   return (
     <>
       <Header
-        showText={false}
-        cartItem={0}
-        restaurantLabel={"Restaurantes"}
+        $showtext={false}
+        $cartitem={0}
+        $restaurantlabel={'Restaurantes'}
         isProfilePage={true}
       />
       <Hero
@@ -45,10 +50,10 @@ const Profile = () => {
         imagem={restaurant.capa}
       />
       <div>
-        <ProductList products={restaurant.cardapio} />
+        <ProductList isLoading={isLoading} products={restaurant.cardapio} />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile

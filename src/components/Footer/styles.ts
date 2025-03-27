@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import rodape_rect from '../../assets/images/rodape_rect.png';
-import { Logo } from '../Header/styles';
-import { cores } from '../../styles';
+import styled from 'styled-components'
+import rodape_rect from '../../assets/images/rodape_rect.png'
+import { Logo } from '../Header/styles'
+import { colors } from '../../styles'
 
 export const FooterBar = styled.footer`
   background-image: url(${rodape_rect});
@@ -12,7 +12,7 @@ export const FooterBar = styled.footer`
   align-items: center;
   height: 298px;
   margin-top: 80px;
-  color: ${cores.terciaria};
+  color: ${colors.tertiary};
 
   ${Logo} {
     width: 125px;
@@ -30,8 +30,8 @@ export const FooterBar = styled.footer`
     font-size: 10px;
 
     @media (max-width: 768px) {
-    width: 320px;
-  }
+      width: 320px;
+    }
   }
 `
 

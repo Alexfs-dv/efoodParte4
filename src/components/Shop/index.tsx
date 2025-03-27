@@ -1,7 +1,9 @@
-import Tag from "../Tag"
-import { Card, CardBody, CardImage, Description, Info, Title } from "./styles"
-import Button from "../Button"
+import Tag from '../Tag'
 import star from '../../assets/images/star.png'
+
+import Button from '../Button'
+
+import * as S from './styles'
 
 type ShopProps = {
   isFeatured: boolean
@@ -11,34 +13,41 @@ type ShopProps = {
   description: string
   rate: number
   id: number
-};
+}
 
-const Shop = ({ isFeatured, title, img, tagInfo, description, rate, id }: ShopProps) => {
-
+const Shop = ({
+  isFeatured,
+  title,
+  img,
+  tagInfo,
+  description,
+  rate,
+  id
+}: ShopProps) => {
   return (
-    <Card>
-    <CardImage>
-      <img src={img} alt={title} />
-    </CardImage>
-    <Info>
-      {isFeatured && <Tag>Destaque da semana</Tag>}
-      <Tag>{tagInfo}</Tag>
-    </Info>
-    <CardBody>
-      <div className="title">
-        <Title>{title}</Title>
-        <div className="rate">
-          <p>{rate}</p>
-          <img src={star} alt="classificação" />
+    <S.Card>
+      <S.CardImage>
+        <img src={img} alt={title} />
+      </S.CardImage>
+      <S.Info>
+        {isFeatured && <Tag>Destaque da semana</Tag>}
+        <Tag>{tagInfo}</Tag>
+      </S.Info>
+      <S.CardBody>
+        <div className="title">
+          <S.Title>{title}</S.Title>
+          <div className="rate">
+            <p>{rate}</p>
+            <img src={star} alt="classificação" />
+          </div>
         </div>
-      </div>
-      <Description>
-        {description}
-      </Description>
-      <Button type="link" to={`/shop/${id}`} title="Saiba mais">Saiba mais</Button>
-    </CardBody>
-  </Card>
+        <S.Description>{description}</S.Description>
+        <Button type="link" to={`/shop/${id}`} title="Saiba mais">
+          Saiba mais
+        </Button>
+      </S.CardBody>
+    </S.Card>
   )
 }
 
-export default Shop;
+export default Shop

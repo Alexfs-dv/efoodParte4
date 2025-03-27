@@ -1,13 +1,13 @@
-import styled from 'styled-components';
-import { cores } from '../../styles';
-import { TagContainer } from '../Tag/styles';
+import styled from 'styled-components'
+import { colors } from '../../styles'
+import { TagContainer } from '../Tag/styles'
 
 export const Card = styled.div`
-  background-color: ${cores.branco};
+  background-color: ${colors.white};
   display: block;
   margin-bottom: 48px;
   position: relative;
-  color: ${cores.terciaria};
+  color: ${colors.tertiary};
 
   ${TagContainer} {
     margin-right: 8px;
@@ -65,6 +65,6 @@ export const CardBody = styled.div`
   padding: 8px;
   border-width: 0px 1px 1px 1px;
   border-style: solid;
-  border-color: #E66767;
+  border-color: #e66767;
   margin-top: -4px;
 `
