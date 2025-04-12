@@ -1,11 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
 
-import { ProductButton } from '../Product/styles'
-
 import { RootReducer } from '../../store'
 import { close, remove } from '../../store/reducers/cart'
 import { getTotalPrice, parseToBrl } from '../../utils'
 
+import { ProductButton } from '../Product/styles'
 import {
   Overlay,
   CartContainer,
@@ -13,12 +12,9 @@ import {
   PriceTotal,
   $Cartitem
 } from './styles'
-import { useState } from 'react'
-import Checkout from '../Checkout'
 
-const Cart = () => {
+const Cart = ({ onCheckout }: { onCheckout: () => void }) => {
   const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
-  const [showCheckout, setShowCheckout] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -32,17 +28,13 @@ const Cart = () => {
 
   const openCheckout = () => {
     if (items.length > 0) {
-      setShowCheckout(true)
+      onCheckout()
     } else {
       alert(
         'O carrinho está vazio, por favor adicione pelo menos 1 item ao carrinho para prosseguir!'
       )
       closeCart()
     }
-  }
-
-  if (showCheckout) {
-    return <Checkout />
   }
 
   return (

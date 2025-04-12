@@ -39,7 +39,7 @@ export const Sidebar = styled.aside`
     font-size: 14px;
     line-height: 22px;
     color: ${colors.primary};
-    text-alogn: center;
+    text-align: center;
   }
 `
 
